@@ -3,12 +3,35 @@
 <head>
   <title>Tumblr</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Raleway:400,700' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="sidebar">
+		<ul>
+			<li class="category"><%= link_to 'Tumblr', root_path %></li>
+			<li> <%= link_to 'Posts', root_path %></li>
+			<li> <%= link_to 'About', root_path %> </li>
+			<li> <%= link_to 'Sign In', root_path %> </li>
+		</ul>
+	</div>
 
-<%= yield %>
+	<div id="main_content">
+		<div id="header">
+			<p>Post Feed</p>
+			<div class="buttons">
+				<%= link_to "New Post", new_post_path, class: "button" %>
+				<%= link_to "Sign Out", root_path, class: "button" %>
+			</div>
+		</div>
 
+			<% flash.each do |name, msg|%>
+				<%= content_tag(:div, msg, class: 'alert')%>
+			<% end %>
+		<%= yield %>
+	</div>
+	
 </body>
 </html>
