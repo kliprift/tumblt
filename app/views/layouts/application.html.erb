@@ -14,7 +14,9 @@
 			<li class="category"><%= link_to 'Tumblr', root_path %></li>
 			<li> <%= link_to 'Posts', root_path %></li>
 			<li> <%= link_to 'About', "/about" %> </li>
-			<li> <%= link_to 'Sign In', root_path %> </li>
+			
+			<li> <%= link_to 'Sign In', new_user_session_path %> </li>
+
 		</ul>
 	</div>
 
@@ -29,8 +31,11 @@
 			<% end %>
 
 			<div class="buttons">
-				<%= link_to "New Post", new_post_path, class: "button" %>
-				<%= link_to "Sign Out", root_path, class: "button" %>
+				<% if user_signed_in? %>
+					<%= link_to "New Post", new_post_path, class: "button" %>
+			
+				 	<%= link_to('Sign Out', destroy_user_session_path,class: "button", :method => :delete) %> 
+				 <% end %>
 			</div>
 		</div>
 

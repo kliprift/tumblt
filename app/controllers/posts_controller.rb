@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @posts = Post.all.order('created_at DESC')
   end
@@ -40,14 +40,14 @@ class PostsController < ApplicationController
   end
 
 
-  private
+private
 
-    def post_params
-      params.require(:post).permit(:title, :body)
-    end
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
 
-    def find_post
-      @post = Post.find(params[:id])
-    end
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
 end
